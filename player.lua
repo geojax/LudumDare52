@@ -1,19 +1,29 @@
 function init_plr()
-    plr_x=0
+    plr_x=110
     plr_y=0
     plr_dy=0
+    plr_dx=0
     plr_energy=10
-    term_v=3
+    term_v_glide=3
+    term_v_dive=10
     flap_strength=2
 end
 
 function upd_plr()
-    -- down to gain speed and angle downward
-    -- up to flap wings, uses energy
-    if(btnp(2))plr_dy-=flap_strength
-    if(btnp(3))plr_dy+=flap_strength
+    --input
+    -- flap when up is pressed.
+    if btnp(2) then
+        plr_dy-=flap_strength 
+        plr_dx=min(-1,plr_dx * .8)
+    end
 
-    plr_dy=mid(plr_dy+grav,term_v,-term_v)
+    -- dive when down is pressed, otherwise glide.
+    if btn(3) then
+        plr_dy+=grav 
+        plr_dx-=grav
+    else
+        plr_dy=mid(plr_dy+grav,term_v_glide,-term_v_glide)
+    end
     plr_y+=plr_dy
 end
 
