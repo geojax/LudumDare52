@@ -4,6 +4,7 @@ function _init()
     draw=dr_main
     update=upd_main
     cam_lobound=10
+    cam_hibound=-60
     init_plr()
     init_bg()
 end
@@ -13,6 +14,5 @@ function _update()
 end
 
 function _draw()
-    cls()
     draw()
 end
